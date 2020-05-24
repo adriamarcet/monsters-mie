@@ -1,0 +1,10 @@
+{
+  "name": "monster-mine",
+  "version": "1.0.0",
+  "description": "A monster mine like game",
+  "main": "index.js",
+  "repository": "https://github.com/adriamarcet/monsters-mie",
+  "author": "Adrià Marcet",
+  "license": "MIT",
+  "private": false
+}
