@@ -2,9 +2,15 @@
 	"use strict";
 	/** Declarations */
 	const app = document.getElementById('app');
-	const door = 'https://www.svgrepo.com/show/84749/closed-filled-rectangular-door.svg';
+    const door = 'https://www.svgrepo.com/show/84749/closed-filled-rectangular-door.svg';
+    var alert = document.createElement('p'); // is a node
+    alert.setAttribute('role', 'alert');
+    alert.innerHTML = 'You have hit the sock';
+
+    var monstersGrid = [];
 	var monsterDoors = [];
-	// The monsters and socks
+
+    // The monsters and socks
 	const monsters = [
 		'monster1',
 		'monster2',
@@ -40,13 +46,35 @@
 		return array;
 	};
 
-	var startGame = () => {
-		const shuffledMonsters = shuffle(monsters.slice());
-		const monstersGrid = shuffledMonsters.map(monster => {
-			return `<div class="grid"><button class="js-monster-door" style="background-image: url('${door}');"><span class="js-monster" data-monster="${monster}" aria-live></span></button></div>`;
-		}).join('');
+    var displayShuffledMonsters = function() {
+        const shuffledMonsters = shuffle(monsters.slice());
 
-        app.innerHTML = `<div class="row">${monstersGrid}</div>`;
+        shuffledMonsters.forEach(function (shuffledMonster) {
+            var gridWrapper = document.createElement('div');
+            gridWrapper.classList.add('grid');
+
+            var button = document.createElement('button');
+            button.classList.add('js-monster-door');
+            button.style.backgroundImage = '';
+            button.setAttribute('aria-live', 'polite');
+            button.textContent = 'Knock at the door';
+
+            gridWrapper.appendChild(button);
+
+            monstersGrid.push(gridWrapper);
+        });
+
+        console.log(monstersGrid);
+
+        var row = document.createElement('div');
+        row.classList.add('row');
+        row.appendChild(monstersGrid.join());
+
+        app.appendChild(row);
+    }
+
+	var startGame = () => {
+        displayShuffledMonsters();
         monsterDoors = document.querySelectorAll('.js-monster-door');
 	};
 
@@ -55,16 +83,16 @@
     /** Listeners */
 	monsterDoors.forEach(monsterDoor => {
 		monsterDoor.addEventListener('click', () => {
-			var monsterInside = monsterDoor.querySelector('.js-monster');
-			var monsterInsideText = monsterInside.getAttribute('data-monster');
+            var monsterInside = monsterDoor.getAttribute('data-monster');
 
-			if(monsterInsideText == 'sock') {
-				alert('you hit the sock')
-				startGame();
+            if (monsterInside == 'sock') {
+                app.insertBefore(alert, app.firstElementChild.nextSibling);
+                startGame();
+                return;
 			}
 
 			monsterDoor.style.background = '';
-			monsterInside.textContent = monsterInsideText;
+            monsterDoor.textContent = monsterInside;
 		});
 	});
 })();
