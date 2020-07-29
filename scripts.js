@@ -5,7 +5,7 @@
     const door = 'https://www.svgrepo.com/show/84749/closed-filled-rectangular-door.svg';
     var alert = document.createElement('p'); // is a node
     alert.setAttribute('role', 'alert');
-    alert.innerHTML = 'You have hit the sock';
+    alert.textContent = 'You have hit the sock';
 
     var monstersGrid = [];
 	var monsterDoors = [];
@@ -55,8 +55,9 @@
 
             var button = document.createElement('button');
             button.classList.add('js-monster-door');
-            button.style.backgroundImage = '';
+            button.style.backgroundImage = 'url(' + door + ')';
             button.setAttribute('aria-live', 'polite');
+            button.setAttribute('data-monster', shuffledMonster);
             button.textContent = 'Knock at the door';
 
             gridWrapper.appendChild(button);
@@ -64,11 +65,11 @@
             monstersGrid.push(gridWrapper);
         });
 
-        console.log(monstersGrid);
-
         var row = document.createElement('div');
         row.classList.add('row');
-        row.appendChild(monstersGrid.join());
+        monstersGrid.forEach(function(monsterGrid) {
+            row.appendChild(monsterGrid);
+        });
 
         app.appendChild(row);
     }
@@ -85,10 +86,13 @@
 		monsterDoor.addEventListener('click', () => {
             var monsterInside = monsterDoor.getAttribute('data-monster');
 
+
             if (monsterInside == 'sock') {
-                app.insertBefore(alert, app.firstElementChild.nextSibling);
+                app.innerHTML = '';
+                // app.insertBefore(alert, app.firstElementChild.nextSibling);
                 startGame();
-                return;
+                monsterDoors = document.querySelectorAll('.js-monster-door');
+                // return;
 			}
 
 			monsterDoor.style.background = '';
