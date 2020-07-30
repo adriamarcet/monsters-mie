@@ -1,9 +1,12 @@
 (function(){
 	"use strict";
 	/** Declarations */
-	const app = document.getElementById('app');
-    const door = 'https://www.svgrepo.com/show/84749/closed-filled-rectangular-door.svg';
-    var alert = document.createElement('p'); // is a node
+	var app = document.getElementById('app');
+	var appMessages = document.getElementById('app-messages');
+	var restarGameButton = document.querySelector('.js-restart');
+    var door = 'https://www.svgrepo.com/show/84749/closed-filled-rectangular-door.svg';
+
+	var alert = document.createElement('p');
     alert.setAttribute('role', 'alert');
     alert.textContent = 'You have hit the sock';
 
@@ -11,7 +14,7 @@
 	var monsterDoors = [];
 
     // The monsters and socks
-	const monsters = [
+	var monsters = [
 		'monster1',
 		'monster2',
 		'monster3',
@@ -47,7 +50,7 @@
 	};
 
 	var shuffleMonsters = function() {
-		const shuffledMonsters = shuffle(monsters.slice());
+		var shuffledMonsters = shuffle(monsters.slice());
 		return shuffledMonsters;
 	}
 
@@ -91,15 +94,18 @@
 				var monsterInside = monsterDoor.getAttribute('data-monster');
 
 				if (monsterInside == 'sock') {
-					// app.insertBefore(alert, app.firstElementChild.nextSibling);
+					appMessages.hidden = false;
 					app.innerHTML = '';
-					startGame();
-					// return;
 				}
 
 				monsterDoor.style.background = '';
 				monsterDoor.textContent = monsterInside;
 			}, monsterDoors);
+		});
+
+		restarGameButton.addEventListener('click', () => {
+			appMessages.hidden = true;
+			startGame();
 		});
 	};
 
