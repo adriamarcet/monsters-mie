@@ -31,7 +31,7 @@
 		'monster6',
 		'monster7',
 		'monster8',
-		'sock'
+		'boo'
 	];
 
 	/** Functions */
@@ -63,15 +63,16 @@
 		// Reset the grid
 		monstersGrid = [];
 
-		var shuffled = shuffleMonsters();
-		shuffled.forEach(function (shuffledMonster, index) {
+		var shuffledMonsters = shuffleMonsters();
+		var shuffledDoors = shuffle(doors);
+		shuffledMonsters.forEach(function (shuffledMonster, index) {
             var gridWrapper = document.createElement('div');
             gridWrapper.classList.add('grid');
 
             var button = document.createElement('button');
             button.classList.add('js-monster-door');
             button.classList.add('button-door');
-            button.style.backgroundImage = 'url(' + sourceImages + '/' + doors[index] + '.jpg' + ')';
+			button.style.backgroundImage = 'url(' + sourceImages + shuffledDoors[index] + '.jpg' + ')';
             button.setAttribute('aria-live', 'polite');
             button.setAttribute('data-monster', shuffledMonster);
             button.textContent = 'Knock at the door';
@@ -99,13 +100,14 @@
 			monsterDoor.addEventListener('click', () => {
 				var monsterInside = monsterDoor.getAttribute('data-monster');
 
-				if (monsterInside == 'sock') {
+				monsterDoor.style.backgroundImage = 'url(' + sourceImages + monsterInside + '.png' + ')';
+				monsterDoor.textContent = monsterInside;
+
+				if (monsterInside == 'boo') {
 					appMessages.hidden = false;
 					app.innerHTML = '';
 				}
 
-				monsterDoor.style.background = '';
-				monsterDoor.textContent = monsterInside;
 			}, monsterDoors);
 		});
 
