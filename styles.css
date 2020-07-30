@@ -41,6 +41,7 @@ img {
 
 .button-door {
 	appearance: none;
+	background-color: #082223;
 	background-position: 50%;
 	background-repeat: no-repeat;
 	background-size: auto;

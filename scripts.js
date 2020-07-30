@@ -108,6 +108,7 @@
 				span.classList.add(classVisuallyHidden);
 
 				monsterDoor.style.backgroundImage = 'url(' + sourceImages + monsterInside + '.png' + ')';
+				monsterDoor.style.backgroundColor = 'white';
 				span.textContent = monsterInside;
 				monsterDoor.appendChild(span);
 
