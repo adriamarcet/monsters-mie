@@ -6,10 +6,6 @@
 	var restarGameButton = document.querySelector('.js-restart');
     var door = 'https://www.svgrepo.com/show/84749/closed-filled-rectangular-door.svg';
 
-	var alert = document.createElement('p');
-    alert.setAttribute('role', 'alert');
-    alert.textContent = 'You have hit the sock';
-
     var monstersGrid = [];
 	var monsterDoors = [];
 
