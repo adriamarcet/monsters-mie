@@ -51,7 +51,13 @@ img {
 	width: 100%;
 }
 
-.credits { color: white;}
+.credits {
+	color: white;
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+}
+
 .credits a { color: white;}
 
 .status-restart-game .popup-restart {
