@@ -29,6 +29,16 @@ img {
 	max-width: 100%;
 }
 
+.button.button--primary {
+	-webkit-appearance: none;
+	background: darkseagreen;
+	border-radius: 20px;
+	border: 1px solid black;
+	min-height: 50px;
+	min-width: 200px;
+	text-transform: uppercase;
+}
+
 .button-door {
 	appearance: none;
 	background-position: 50%;
@@ -42,3 +52,23 @@ img {
 
 .credits { color: white;}
 .credits a { color: white;}
+
+.status-restart-game .popup-restart {
+	align-content: center;
+	background-color: rgb(245 222 179/.9);
+	bottom: 4rem;
+	display: flex;
+	flex-direction: column;
+	font-size: 120%;
+	justify-content: center;
+	left: 4rem;
+	padding: 4rem;
+	position: absolute;
+	right: 4rem;
+	text-align: center;
+	top: 4rem;
+}
+
+.status-restart-game .button-door {
+	pointer-events: none;
+}

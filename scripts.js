@@ -4,7 +4,8 @@
 	var app = document.getElementById('app');
 	var appMessages = document.getElementById('app-messages');
 	var restarGameButton = document.querySelector('.js-restart');
-    var door = 'https://www.svgrepo.com/show/84749/closed-filled-rectangular-door.svg';
+	var monsterDoorClass = 'js-monster-door';
+	var statusClassRestart = 'status-restart-game';
 	var sourceImages = 'assets/img/';
     var monstersGrid = [];
 	var monsterDoors = [];
@@ -70,7 +71,7 @@
             gridWrapper.classList.add('grid');
 
             var button = document.createElement('button');
-            button.classList.add('js-monster-door');
+			button.classList.add(monsterDoorClass);
             button.classList.add('button-door');
 			button.style.backgroundImage = 'url(' + sourceImages + shuffledDoors[index] + '.jpg' + ')';
             button.setAttribute('aria-live', 'polite');
@@ -93,7 +94,7 @@
 	var startGame = () => {
         app.appendChild(displayShuffledMonsters());
 
-		monsterDoors = document.querySelectorAll('.js-monster-door');
+		monsterDoors = document.querySelectorAll('.' + monsterDoorClass);
 
 		/** Listeners */
 		monsterDoors.forEach(function (monsterDoor) {
@@ -105,17 +106,18 @@
 
 				if (monsterInside == 'boo') {
 					appMessages.hidden = false;
-					app.innerHTML = '';
+					document.documentElement.classList.add(statusClassRestart);
 				}
-
 			}, monsterDoors);
 		});
 
 		restarGameButton.addEventListener('click', () => {
 			appMessages.hidden = true;
+			app.innerHTML = '';
+			document.documentElement.classList.remove(statusClassRestart);
 			startGame();
 		});
 	};
 
-    startGame();
+	startGame();
 })();
