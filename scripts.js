@@ -54,6 +54,7 @@
     var displayShuffledMonsters = function() {
 		// Reset the grid
 		monstersGrid = [];
+
 		var shuffled = shuffleMonsters();
 		shuffled.forEach(function (shuffledMonster) {
             var gridWrapper = document.createElement('div');
@@ -67,8 +68,6 @@
             button.textContent = 'Knock at the door';
 
             gridWrapper.appendChild(button);
-
-
             monstersGrid.push(gridWrapper);
         });
 
@@ -85,27 +84,24 @@
         app.appendChild(displayShuffledMonsters());
 
 		monsterDoors = document.querySelectorAll('.js-monster-door');
-		console.log(monsterDoors);
+
+		/** Listeners */
+		monsterDoors.forEach(function (monsterDoor) {
+			monsterDoor.addEventListener('click', () => {
+				var monsterInside = monsterDoor.getAttribute('data-monster');
+
+				if (monsterInside == 'sock') {
+					// app.insertBefore(alert, app.firstElementChild.nextSibling);
+					app.innerHTML = '';
+					startGame();
+					// return;
+				}
+
+				monsterDoor.style.background = '';
+				monsterDoor.textContent = monsterInside;
+			}, monsterDoors);
+		});
 	};
 
     startGame();
-
-    /** Listeners */
-	monsterDoors.forEach(monsterDoor => {
-		monsterDoor.addEventListener('click', () => {
-            var monsterInside = monsterDoor.getAttribute('data-monster');
-
-
-            if (monsterInside == 'sock') {
-                // app.insertBefore(alert, app.firstElementChild.nextSibling);
-                app.innerHTML = '';
-                startGame();
-                monsterDoors = document.querySelectorAll('.js-monster-door');
-                // return;
-			}
-
-			monsterDoor.style.background = '';
-            monsterDoor.textContent = monsterInside;
-		});
-	});
 })();
