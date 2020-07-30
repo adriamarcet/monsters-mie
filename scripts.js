@@ -61,7 +61,8 @@
 
             var button = document.createElement('button');
             button.classList.add('js-monster-door');
-            button.style.backgroundImage = 'url(' + door + ')';
+            button.classList.add('button-door');
+            // button.style.backgroundImage = 'url(' + door + ')';
             button.setAttribute('aria-live', 'polite');
             button.setAttribute('data-monster', shuffledMonster);
             button.textContent = 'Knock at the door';

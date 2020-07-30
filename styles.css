@@ -1,21 +1,25 @@
+:root {
+	--button-width: 287px;
+	--button-height: 458px;
+}
+
+body,html {
+	background-color: #082223;
+}
 
 button {
 	appearance: none;
-	height: 200px;
-	background-size: cover;
+	background-size: auto;
 	border: 0;
-	width: 200px;
+	height: var(--button-height);
+	width: var(--button-width);
 }
 
 .row {
 	display: grid;
-	grid-template-columns: auto auto auto;
-	text-align: center;
-}
-
-.grid {
-	min-height: 6em;
-	padding: 1em;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr;
+	justify-items: center;
 }
 
 /**
@@ -24,4 +28,8 @@ button {
 img {
 	height: auto;
 	max-width: 100%;
+}
+
+.button-door {
+	background-image: url('assets/img/doors.jpg');
 }
