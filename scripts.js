@@ -46,10 +46,16 @@
 		return array;
 	};
 
-    var displayShuffledMonsters = function() {
-        const shuffledMonsters = shuffle(monsters.slice());
+	var shuffleMonsters = function() {
+		const shuffledMonsters = shuffle(monsters.slice());
+		return shuffledMonsters;
+	}
 
-        shuffledMonsters.forEach(function (shuffledMonster) {
+    var displayShuffledMonsters = function() {
+		// Reset the grid
+		monstersGrid = [];
+		var shuffled = shuffleMonsters();
+		shuffled.forEach(function (shuffledMonster) {
             var gridWrapper = document.createElement('div');
             gridWrapper.classList.add('grid');
 
@@ -62,6 +68,7 @@
 
             gridWrapper.appendChild(button);
 
+
             monstersGrid.push(gridWrapper);
         });
 
@@ -71,12 +78,14 @@
             row.appendChild(monsterGrid);
         });
 
-        app.appendChild(row);
+        return row;
     }
 
 	var startGame = () => {
-        displayShuffledMonsters();
-        monsterDoors = document.querySelectorAll('.js-monster-door');
+        app.appendChild(displayShuffledMonsters());
+
+		monsterDoors = document.querySelectorAll('.js-monster-door');
+		console.log(monsterDoors);
 	};
 
     startGame();
@@ -88,8 +97,8 @@
 
 
             if (monsterInside == 'sock') {
-                app.innerHTML = '';
                 // app.insertBefore(alert, app.firstElementChild.nextSibling);
+                app.innerHTML = '';
                 startGame();
                 monsterDoors = document.querySelectorAll('.js-monster-door');
                 // return;
