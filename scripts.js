@@ -6,6 +6,7 @@
 	var restarGameButton = document.querySelector('.js-restart');
 	var monsterDoorClass = 'js-monster-door';
 	var statusClassRestart = 'status-restart-game';
+	var classVisuallyHidden = 'u-sr-only';
 	var sourceImages = 'assets/img/';
     var monstersGrid = [];
 	var monsterDoors = [];
@@ -70,13 +71,16 @@
             var gridWrapper = document.createElement('div');
             gridWrapper.classList.add('grid');
 
+			var span = document.createElement('span');
             var button = document.createElement('button');
 			button.classList.add(monsterDoorClass);
             button.classList.add('button-door');
 			button.style.backgroundImage = 'url(' + sourceImages + shuffledDoors[index] + '.jpg' + ')';
             button.setAttribute('aria-live', 'polite');
             button.setAttribute('data-monster', shuffledMonster);
-            button.textContent = 'Knock at the door';
+			span.classList.add(classVisuallyHidden);
+			span.textContent = 'Knock at the door';
+			button.append(span);
 
             gridWrapper.appendChild(button);
             monstersGrid.push(gridWrapper);
@@ -100,9 +104,12 @@
 		monsterDoors.forEach(function (monsterDoor) {
 			monsterDoor.addEventListener('click', () => {
 				var monsterInside = monsterDoor.getAttribute('data-monster');
+				var span = document.createElement('span');
+				span.classList.add(classVisuallyHidden);
 
 				monsterDoor.style.backgroundImage = 'url(' + sourceImages + monsterInside + '.png' + ')';
-				monsterDoor.textContent = monsterInside;
+				span.textContent = monsterInside;
+				monsterDoor.appendChild(span);
 
 				if (monsterInside == 'boo') {
 					appMessages.hidden = false;
