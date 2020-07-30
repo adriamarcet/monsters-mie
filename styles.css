@@ -5,14 +5,8 @@
 
 body,html {
 	background-color: #082223;
-}
-
-button {
-	appearance: none;
-	background-size: auto;
-	border: 0;
-	height: var(--button-height);
-	width: var(--button-width);
+	padding: 0;
+	margin: 0;
 }
 
 .row {
@@ -20,6 +14,11 @@ button {
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-template-rows: 1fr 1fr 1fr;
 	justify-items: center;
+	height: 100vh;
+}
+
+.grid {
+	justify-self: stretch;
 }
 
 /**
@@ -31,5 +30,12 @@ img {
 }
 
 .button-door {
-	background-image: url('assets/img/doors.jpg');
+	appearance: none;
+	background-position: 50%;
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-size: contain;
+	border: 0;
+	height: 100%;
+	width: 100%;
 }

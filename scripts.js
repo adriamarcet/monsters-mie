@@ -5,9 +5,21 @@
 	var appMessages = document.getElementById('app-messages');
 	var restarGameButton = document.querySelector('.js-restart');
     var door = 'https://www.svgrepo.com/show/84749/closed-filled-rectangular-door.svg';
-
+	var sourceImages = 'assets/img/';
     var monstersGrid = [];
 	var monsterDoors = [];
+
+	var doors = [
+		'door1',
+		'door2',
+		'door3',
+		'door4',
+		'door5',
+		'door6',
+		'door7',
+		'door8',
+		'door9',
+	];
 
     // The monsters and socks
 	var monsters = [
@@ -19,9 +31,6 @@
 		'monster6',
 		'monster7',
 		'monster8',
-		'monster9',
-		'monster10',
-		'monster11',
 		'sock'
 	];
 
@@ -55,14 +64,14 @@
 		monstersGrid = [];
 
 		var shuffled = shuffleMonsters();
-		shuffled.forEach(function (shuffledMonster) {
+		shuffled.forEach(function (shuffledMonster, index) {
             var gridWrapper = document.createElement('div');
             gridWrapper.classList.add('grid');
 
             var button = document.createElement('button');
             button.classList.add('js-monster-door');
             button.classList.add('button-door');
-            // button.style.backgroundImage = 'url(' + door + ')';
+            button.style.backgroundImage = 'url(' + sourceImages + '/' + doors[index] + '.jpg' + ')';
             button.setAttribute('aria-live', 'polite');
             button.setAttribute('data-monster', shuffledMonster);
             button.textContent = 'Knock at the door';
