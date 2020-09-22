@@ -1,6 +1,6 @@
 (function(){
 	"use strict";
-	/** Declarations */
+
 	var app = document.getElementById('app');
 	var appMessages = document.getElementById('app-messages');
 	var restarGameButton = document.querySelector('.js-restart');
@@ -10,6 +10,7 @@
 	var sourceImages = 'assets/img/';
     var monstersGrid = [];
 	var monsterDoors = [];
+	var found = '';
 
 	var doors = [
 		'door1',
@@ -67,12 +68,14 @@
 
 		var shuffledMonsters = shuffleMonsters();
 		var shuffledDoors = shuffle(doors);
+
 		shuffledMonsters.forEach(function (shuffledMonster, index) {
             var gridWrapper = document.createElement('div');
             gridWrapper.classList.add('grid');
 
 			var span = document.createElement('span');
-            var button = document.createElement('button');
+			var button = document.createElement('button');
+
 			button.classList.add(monsterDoorClass);
             button.classList.add('button-door');
 			button.style.backgroundImage = 'url(' + sourceImages + shuffledDoors[index] + '.jpg' + ')';
@@ -87,13 +90,19 @@
         });
 
         var row = document.createElement('div');
-        row.classList.add('row');
+		row.classList.add('row');
+
         monstersGrid.forEach(function(monsterGrid) {
             row.appendChild(monsterGrid);
         });
 
         return row;
     }
+
+	var showRestarMessages = () => {
+		appMessages.hidden = false;
+		document.documentElement.classList.add(statusClassRestart);
+	};
 
 	var startGame = () => {
         app.appendChild(displayShuffledMonsters());
@@ -107,14 +116,19 @@
 				var span = document.createElement('span');
 				span.classList.add(classVisuallyHidden);
 
-				monsterDoor.style.backgroundImage = 'url(' + sourceImages + monsterInside + '.png' + ')';
-				monsterDoor.style.backgroundColor = 'white';
-				span.textContent = monsterInside;
-				monsterDoor.appendChild(span);
-
 				if (monsterInside == 'boo') {
-					appMessages.hidden = false;
-					document.documentElement.classList.add(statusClassRestart);
+					showRestarMessages();
+				}
+
+				monsterDoor.parentNode.innerHTML = '<img alt="' + monsterInside + '" src="' + sourceImages + monsterInside + '.png">'
+
+				// Increase the number of monsters who have been found by 1
+				found++;
+
+				// If the number of monsters found is equal to the total number (-1 for the sock)
+				// then all monsters have been found and we can render the win UI
+				if (found === (monsters.length - 1)) {
+					showRestarMessages();
 				}
 			}, monsterDoors);
 		});
